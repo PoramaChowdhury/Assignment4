@@ -5,7 +5,7 @@ class CartItem {
   final String size;
   final int price;
   final String imageAsset;
-  int quantity = 1;
+  int quantity ;
 
   CartItem({
     required this.name,
@@ -13,5 +13,6 @@ class CartItem {
     required this.size,
     required this.price,
     required this.imageAsset,
+    this.quantity = 0,
   });
 }
