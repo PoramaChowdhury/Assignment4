@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ostad_assignment/cartItem.dart';
 
@@ -55,54 +54,86 @@ class _AppScreenState extends State<AppScreen> {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
-          return ListTile(
-            leading: Image.asset(
-              item.imageAsset,
-              height: 50,
-              width: 50,
-              fit: BoxFit.cover,
-            ),
-            title: Text(item.name, style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),),
-            subtitle: Row(
-              children: [
-                Text("Color: ${item.color}", style: const TextStyle(
-                  color: Colors.grey,
-                ),),
-                const SizedBox(width: 8),
-                Text('Size: ${item.size}', style: const TextStyle(
-                  color: Colors.grey,
-                ),),
-              ],
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    if (item.quantity > 1) {
-                      _updateQuantity(index, item.quantity - 1);
-                    }
-                  },
-                  icon: const Icon(Icons.remove_circle_outline),
-                ),
-                Text('${item.quantity}'),
-                IconButton(
-                  onPressed: () {
-                    _updateQuantity(index, item.quantity + 1);
-                  },
-                  icon: const Icon(Icons.add_circle_outline),
-                ),
-                Text('\$${(item.price * item.quantity).toStringAsFixed(2)}'),
-              ],
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    item.imageAsset,
+                    height: 80,
+                    width: 80,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Color: ${item.color}",
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Size: ${item.size}',
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                if (item.quantity > 1) {
+                                  _updateQuantity(index, item.quantity - 1);
+                                }
+                              },
+                              icon: const Icon(Icons.remove_circle_outline),
+                            ),
+                            Text('${item.quantity}'),
+                            IconButton(
+                              onPressed: () {
+                                _updateQuantity(index, item.quantity + 1);
+                              },
+                              icon: const Icon(Icons.add_circle_outline),
+                            ),
+                            Text(
+                              '\$${(item.price * item.quantity).toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
       ),
       bottomSheet: Container(
         padding: const EdgeInsets.all(16),
-        color: Colors.grey[200],
+        color: Colors.white60,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
